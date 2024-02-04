@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,10 +26,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9t3ir)iwm%oq4u3y!2dnoi8c&1efrhzc7l$04c2qo#b14)3+i)'
+# SECRET_KEY = 'django-insecure-9t3ir)iwm%oq4u3y!2dnoi8c&1efrhzc7l$04c2qo#b14)3+i)'
+SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-(3o6_%urxo74ol!t$h*3w#-nsw7^k@28x8%afg1nyjl&e)arer")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =  os.environ.get("DEBUG", "True") == "False"
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
     
     'posts',
@@ -54,6 +58,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -89,12 +94,20 @@ WSGI_APPLICATION = 'nk_social_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+
+else:
+    database_url = os.environ.get("DATABASE_URL", "")
+    DATABASES = {     
+        "default": dj_database_url.parse("postgres://nk_social_db_user:d3SPl0kurgSycHtFvfcPQkYPKb2KMWKI@dpg-cmv25jv109ks73b891tg-a.oregon-postgres.render.com/nk_social_db"),              
+    }
 
 
 # Password validation
@@ -143,6 +156,8 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, "frontend/"),
 ]
 
+# STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 # Default primary key field type
