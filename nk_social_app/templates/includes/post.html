@@ -1,10 +1,8 @@
 {% load thumbnail %}
 
-
-
 <!-- component -->
 <!-- class="flex items-center xs:w-[85%] shadow-xl w-full sm:w-[60%] mx-auto bg-white my-20 md:my-0 dark:bg-gray-900 rounded-3xl" -->
-<div class="post-detail w-[90%] bg-white shadow-lg dark:bg-gray-800 dark:border-gray-800 p-4 py-5 px-5 my-10 rounded-xl border mx-auto overflow-hidden" data-url="{% url 'feed:detail' post.id %}" data-show="{{show_link}}">
+<div class="post-detail w-[90%] bg-white shadow-lg dark:bg-gray-800 dark:border-gray-800 p-4 py-5 px-5 my-10 rounded-xl border mx-auto overflow-hidden" data-url="{% url 'post:detail' post.id %}" data-show="{{show_link}}">
     <div class="flex justify-between">
         <a class="flex items-center" href="{% url 'profiles:detail' post.author.username %}">
             {% thumbnail post.author.profile.image "373x373" crop="center" as im %}
