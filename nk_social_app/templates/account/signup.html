@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% load allauth i18n %}
+
+{% block title %} {% trans "Signup" %} {% endblock title %}
+
+{% block content %}
+    <div class="flex items-center xs:w-[85%] shadow-xl w-full sm:w-[70%] my-20 md:my-0 max-w-md mx-auto rounded-3xl bg-white dark:bg-gray-900">
+        <div class="container mx-auto">
+        `    <div class="max-w-md mx-auto my-10">
+                <div class="text-center mx-3">
+                    <h1 class="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">Sign Up</h1>
+                    <p class="text-gray-500 dark:text-gray-400">Create an account</p>
+                    <p class="text-gray-500 dark:text-gray-400">
+                        {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}" class="text-blue-300 hover:text-blue-900">sign in</a>.{% endblocktrans %}
+                    </p>
+                </div>
+                <div class="mx-7 my-1">
+                    <form method="post" action="{% url 'account_signup' %}" class="pt-1">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <p class="error-text text-red-600 my-6 p-1 text-sm text-red-600 dark:text-red-300">
+                            {{ form.non_field_errors.as_text }}
+                        </p>
+                        <div class="mb-4">
+                            <label for="id_email" class="form-label block mb-2 text-sm text-gray-600 dark:text-gray-400">Email Address</label>
+                            <input type="email" class="form-control shadow-none w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" name="email" placeholder="Email address" autocomplete="email" maxlength="320" required="" aria-invalid="true" id="id_email" >
+                            <p id="emailHelp" class="form-text error-text p-1 text-sm text-red-600 dark:text-red-300">
+                                {{ form.email.errors.as_text }}
+                            </p>
+                        </div>
+                        <div class="mb-4">
+                            <label for="id_username" class="form-label block mb-2 text-sm text-gray-600 dark:text-gray-400">Username</label>
+                            <input type="text" class="form-control shadow-none w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" id="id_username" aria-describedby="emailHelp" placeholder="Enter your username" name="username" minlength="2" maxlength="30" required pattern="^[a-zA-Z0-9_.-]+$" title="Only letters, numbers, underscores, periods, and hyphens are allowed.">
+                            <p id="id_username_helptext" class="form-text error-text helptext p-1 text-sm text-red-600 dark:text-red-300">
+                                {{ form.username.errors.as_text }}
+                            </p>
+                        </div>
+                        <div class="mb-4">
+                            <label for="id_password1" class="form-label block mb-2 text-sm text-gray-600 dark:text-gray-400">Password</label>
+                            <input type="password" class="form-control shadow-none w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" id="id_password1" aria-describedby="id_password1_helptext" placeholder="At least 8 characters or more" name="password1" autocomplete="new-password" required>
+                            <p class="form-text error-text helptext p-1 text-sm text-red-600 dark:text-red-300" id="id_password1_helptext">
+                                {{ form.password1.errors.as_text }}
+                            </p>
+                        </div>
+                        <details class="text-sm text-orange-600 dark:text-orange-400 my-6" >
+                            <summary>Password Requirements</summary>
+                            <ul class="text-red-500 dark:text-red-200 text-xs pl-4">
+                              <li>Your password can’t be too similar to your other personal information.</li>
+                              <li>Your password must contain at least 8 characters.</li>
+                              <li>Your password can’t be a commonly used password.</li>
+                              <li>Your password can’t be entirxely numeric.</li>
+                            </ul>
+                          </details>
+                        <div class="mb-4">
+                            <label for="id_password2" class="form-label block mb-2 text-sm text-gray-600 dark:text-gray-400">Confirm Password</label>
+                            <input type="password" class="form-control shadow-none w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" id="id_password2" aria-describedby="id_password2_helptext" placeholder="Enter password again" name="password2" autocomplete="new-password" required >
+                            <p class="form-text error-text helptext p-1 text-sm text-red-600 dark:text-red-300" id="id_password2_helptext">
+                                {{ form.password2.errors.as_text }}
+                            </p>
+                        </div>
+                        <div class="mb-6"></div>
+                            <button class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none inactive-button" type="submit" id="loginButton">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

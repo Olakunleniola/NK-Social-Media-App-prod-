@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block body %}
+    {% if messages %}
+    <div>
+        <strong>{% trans "Messages:" %}</strong>
+        <ul>
+            {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    {% block content %}{% endblock content %}
+{% endblock body %}
