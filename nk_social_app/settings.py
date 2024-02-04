@@ -30,10 +30,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-(3o6_%urxo74ol!t$h*3w#-nsw7^k@28x8%afg1nyjl&e)arer")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  os.environ.get("DEBUG", "True") == "False"
+DEBUG =  os.environ.get("DEBUG", "True") == "True"
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', "127.0.0.1"] + os.environ.get("NEW_HOST", "")
 
 
 # Application definition
@@ -104,9 +104,8 @@ if DEBUG:
     }
 
 else:
-    database_url = os.environ.get("DATABASE_URL", "")
     DATABASES = {     
-        "default": dj_database_url.parse("postgres://nk_social_db_user:d3SPl0kurgSycHtFvfcPQkYPKb2KMWKI@dpg-cmv25jv109ks73b891tg-a.oregon-postgres.render.com/nk_social_db"),              
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),              
     }
 
 
