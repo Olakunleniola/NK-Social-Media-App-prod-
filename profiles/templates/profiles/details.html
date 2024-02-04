@@ -8,15 +8,12 @@
 {% block body %}
     <!-- component -->
     <div class="rounded-3xl overflow-hidden  shadow-xl lg:w-1/2 md:w-[70%] w-full my-12 mx-auto bg-white dark:bg-gray-900 relative">
-        <div 
-            class="w-full h-48 bg-origin-padding bg-no-repeat bg-center bg-cover" 
-            style="background-image: url({% if user.profile.backdrop_image %} {{user.profile.backdrop_image.url}} {% else %} https://i.imgur.com/dYcYQ7E.png {% endif %})
-            ">
-        <!-- <img src="{% if user.profile.backdrop_image %} {{user.profile.backdrop_image.url}} {% else %} https://i.imgur.com/dYcYQ7E.png {% endif %}" class="w-100" /> -->
+        <div class="w-full h-48 bg-origin-padding bg-no-repeat bg-center bg-cover">
+            <img src="{% if user.profile.backdrop_image %} {{user.profile.backdrop_image.url}} {% else %} https://i.imgur.com/dYcYQ7E.png {% endif %}" class="w-full h-full object-cover" />
         </div>
         <div class="flex justify-center -mt-8 mb-10">
             {% thumbnail user.profile.image "150x150" crop="center" as im %}
-                <img class="rounded-full border-solid border-teal-500 border-2 -mt-3" src="{{im.url}}" alt="avatar">
+                <img class="rounded-full border-solid border-teal-500 border-2 -mt-3 object-cover" src="{{im.url}}" alt="avatar">
             {% endthumbnail %}
         </div>
         <div class="text-center px-3 pb-6 pt-2">

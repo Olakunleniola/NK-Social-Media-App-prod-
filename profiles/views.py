@@ -4,7 +4,7 @@ from django.views.generic import DetailView, View, CreateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse
-from feed.models import Post
+from posts.models import Post
 from django.shortcuts import render
 from followers.models import Followers
 from .models import Profile
