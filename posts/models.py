@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Post(models.Model) : 
     text = models.CharField(max_length=240)
     date = models.DateTimeField(auto_now_add=True)
-    image = ImageField(upload_to='post_images/', null=True, blank=True)
+    # image = ImageField(upload_to='post_images/', null=True, blank=True)
+    image = CloudinaryField('image')
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

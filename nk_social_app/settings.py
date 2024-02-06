@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 import dj_database_url
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api	
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,8 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+# Media settings
+
+# CLoud Storage configuration 
+
+cloudinary.config( 
+  cloud_name = "dhlmazrcf", 
+  api_key =  os.environ.get("CLD_KEY", "815727515698713"), 
+  api_secret = os.environ.get("CLD_SECRET", "ojFQNxqfN0K_RxQluD58ml0jMM0") 
+)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -30,7 +41,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-(3o6_%urxo74ol!t$h*3w#-nsw7^k@28x8%afg1nyjl&e)arer")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  os.environ.get("DEBUG", "True") == "True"
+DEBUG =  bool(int(os.environ.get("DEBUG", 1)))
 
 
 ALLOWED_HOSTS = ['localhost', "127.0.0.1"] + [os.environ.get("NEW_HOST", "")]
@@ -54,6 +65,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'sorl.thumbnail',
+    
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +118,7 @@ if DEBUG:
 
 else:
     DATABASES = {     
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),              
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL", "postgres://nk_social_db_ismv_user:W28GaEgsYP3Vk3IAUjuowLiiTeIcaAys@dpg-cn0l97f109ks73c8t4ng-a.oregon-postgres.render.com/nk_social_db_ismv")),              
     }
 
 
@@ -147,6 +160,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+if DEBUG:
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")

@@ -86,10 +86,7 @@ class EditProfile(LoginRequiredMixin, TemplateView):
         first_name =  request.POST.get("first_name")
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
-        print(username)
-        print(first_name)
-        print(last_name)
-        print(email)
+     
 
         # Validate images
         if profile_image: 
@@ -102,14 +99,19 @@ class EditProfile(LoginRequiredMixin, TemplateView):
         if cover_image:    
             if not self.verify_image(cover_image):
                 return JsonResponse({
-                    'error': 'Invalid cover image. Only JPEG, PNG, and GIF files are allowed.'
+                    'error': 'Invalid backdrop image. Only JPEG, PNG, and GIF files are allowed.'
                 }, status=400)
             request.user.profile.backdrop_image = cover_image
                  
         # Update user profile and user details
         if username:
-            request.user.username = username
-        
+            exist = User.objects.filter(username=username).exists()
+            if not exist:
+                request.user.username = username
+            else: 
+                return JsonResponse({
+                    'error': "username already exist. Try Again"
+                }, status=400)
         if first_name: 
             request.user.first_name = first_name
         
@@ -117,14 +119,18 @@ class EditProfile(LoginRequiredMixin, TemplateView):
             request.user.last_name = last_name
         
         if email:
-            request.user.email = email
-        
+            exist = User.objects.filter(email=email).exists()
+            if not exist:
+                request.user.email = email
+            else: 
+                return JsonResponse({
+                    'error': "email already exist. Try Again"
+                }, status=400)
+    
         # Save the changes to the user
         request.user.save()
-
         # Update or set profile images
         request.user.profile.save()
-
         # Redirect to the user's profile page
         redirect_url = reverse('profiles:detail', kwargs={'username': request.user.username})
         response_data = {'redirect': redirect_url}

@@ -17,7 +17,7 @@
         <div class="w-screen h-16 border-b-2 shadow-md  border-teal-500 bg-white dark:bg-black dark:border-b-2 dark:border-teal-200 fixed top-0 md:hidden flex px-5 items-center justify-between">
           {% if not request.user.is_anonymous %}
             <button class="block js-sidenav-toggle">
-              <img src="{% if request.user.profile.image %} {{request.user.profile.image.url}}{% endif %}" alt="{% if not request.user.profile.image %}upload a pics {% else %}Avatar user {% endif %}"class="w-10 h-10 md:w-36 md:h-36 rounded-full mx-auto border-solid border-2 border-teal-300 object-cover"/>
+              <img src="{% if request.user.profile.image %} {{request.user.profile.image.url}} {% else %} https://i.pinimg.com/1200x/da/d0/31/dad0312b7d04cc741c5fadd2eac3e0a6.jpg {% endif %}" alt="{% if not request.user.profile.image %}upload a pics {% else %}Avatar user {% endif %}"class="w-10 h-10 md:w-36 md:h-36 rounded-full mx-auto border-solid border-2 border-teal-300 object-cover"/>
             </button>
           {%endif%}
           <a href="#top">
@@ -102,7 +102,7 @@
                 <!-- Profile  -->
                 {% if not request.user.is_anonymous %}
                   <a id="profile" class="space-y-6 block " href="{% url 'profiles:detail' request.user.username %}">
-                    <img src="{% if request.user.profile.image %} {{request.user.profile.image.url}} {% else %} https://e0.pxfuel.com/wallpapers/355/72/desktop-wallpaper-cartoon-boy-iphone-cute-cartoon-boys.jpg{% endif %}" alt="profile image"class="w-16 h-16 md:w-36 md:h-36 xl:w-48 xl:h-48 rounded-full mx-auto border-solid border-4 border-teal-300 object-cover"/>
+                    <img src="{% if request.user.profile.image %} {{request.user.profile.image.url}} {% else %} https://i.pinimg.com/1200x/da/d0/31/dad0312b7d04cc741c5fadd2eac3e0a6.jpg {% endif %}" alt="profile image"class="w-16 h-16 md:w-36 md:h-36 xl:w-48 xl:h-48 rounded-full mx-auto border-solid border-4 border-teal-300 object-cover"/>
                     <div class="text-center">
                       <h2 class="font-medium text-sm md:text-lg text-center dark:text-teal-400 text-teal-700">{{request.user.first_name}} {{request.user.last_name}}</h2>
                       <span class="block text-black dark:text-gray-400">@{{request.user.username}}</span>
@@ -111,7 +111,7 @@
                 {%endif%}
                 <!-- Menu  -->
                 <div id="menu" class="flex flex-col space-y-4 left-0 my-42">
-                    <a href="/" class="flex flex-row items-center justify-items-center content-center text-sm font-medium dark:text-gray-200 text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">
+                    <a href="/" class="flex flex-row items-center justify-items-center content-center text-sm font-medium dark:text-gray-200 text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:text-base hover:scale-200 rounded-md transition duration-150 ease-in-out">
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current " fill="currentColor" viewBox="0 0 50 60">
                         <path d="M 25 1.0507812 C 24.7825 1.0507812 24.565859 1.1197656 24.380859 1.2597656 L 1.3808594 19.210938 C 0.95085938 19.550938 0.8709375 20.179141 1.2109375 20.619141 C 1.5509375 21.049141 2.1791406 21.129062 2.6191406 20.789062 L 4 19.710938 L 4 46 C 4 46.55 4.45 47 5 47 L 19 47 L 19 29 L 31 29 L 31 47 L 45 47 C 45.55 47 46 46.55 46 46 L 46 19.710938 L 47.380859 20.789062 C 47.570859 20.929063 47.78 21 48 21 C 48.3 21 48.589063 20.869141 48.789062 20.619141 C 49.129063 20.179141 49.049141 19.550938 48.619141 19.210938 L 25.619141 1.2597656 C 25.434141 1.1197656 25.2175 1.0507812 25 1.0507812 z M 35 5 L 35 6.0507812 L 41 10.730469 L 41 5 L 35 5 z"/>
                       </svg>
@@ -125,7 +125,7 @@
                           </svg>
                           <span class="ml-1">New Post</span>
                         </a>
-                        <a href="{% url 'profiles:detail' request.user.username %}" class="flex flex-row items-center justify-items-center content-center dark:text-gray-200 text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">
+                        <a href="{% url 'profiles:detail' request.user.username %}" class="flex flex-row items-center justify-items-center content-center dark:text-gray-200 text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-90 rounded-md hover:text-base transition duration-150 ease-in-out">
                           <svg class="w-6 h-6 fill-current inline-block" xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 132.88">
                             <path d="M61.44,0a61.59,61.59,0,0,1,56.78,38l.07.18A61.43,61.43,0,0,1,18,104.88h0A61.54,61.54,0,0,1,4.66,84.94l-.07-.19A61.35,61.35,0,0,1,18,18h0A61.54,61.54,0,0,1,37.94,4.66l.18-.07A61.25,61.25,0,0,1,61.44,0ZM49.54,79.32c-2.14-1.83-4.2-3.89-4.54-7.65h-.28a3.79,3.79,0,0,1-1.87-.49,5.1,5.1,0,0,1-2.05-2.49c-.95-2.18-1.7-7.91.68-9.55L41,58.85l0-.64c-.1-1.15-.12-2.55-.14-4-.09-5.39-.2-11.91-4.53-13.22l-1.85-.56,1.22-1.51a70,70,0,0,1,10.84-11c4.17-3.28,8.41-5.47,12.56-6.1A15.09,15.09,0,0,1,71.3,25.22a23,23,0,0,1,3.27,3.28,13.93,13.93,0,0,1,9.78,5.72,19.89,19.89,0,0,1,3.18,6.42,22.34,22.34,0,0,1,.86,7.28,17.54,17.54,0,0,1-5.08,11.81,3.62,3.62,0,0,1,1.58.4c1.81,1,1.87,3.07,1.39,4.83-.47,1.47-1.06,3.17-1.63,4.6C84,71.5,83,71.86,81,71.65c-.08,4.18-2.8,6.18-5.47,8.49l.08.12a31.89,31.89,0,0,0,3.51,4.52.75.75,0,0,1,.12.14c6.19,4.38,19.56,5.44,25.34,8.66l.23.14a54.09,54.09,0,1,0-86.83,0h0l.23-.14C24,90.36,40.73,89.3,47,85a19.43,19.43,0,0,0,1.43-2.77c.41-1,.81-2,1.15-2.86Z"/>
                           </svg>
@@ -160,7 +160,7 @@
 
     </main>
     
-    <!-- Go top Arrow -->
+    <!-- Go top  Modal Arrow -->
     <a href="#top" id="navigate-top" class="fixed bottom-4 right-10 md:right-20 xl:right-[310px] hidden border-l-0">
       <svg class="fill-current w-10 h-10 text-teal-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="122.883px" height="122.882px" viewBox="0 0 122.883 122.882" enable-background="new 0 0 122.883 122.882" xml:space="preserve">
         <g>
@@ -175,7 +175,7 @@
         <div id="sidebar" class="bg-white dark:bg-black md:block shadow-xl px-3 w-30 w-48  overflow-x-hidden transition-transform duration-300 ease-in-out" x-show="sidenav">
           <div class="space-y-6 md:space-y-5 mt-10 ">
               <!-- App Name and Logo -->
-              <div class="md:block font-bold text-sm md:text-xl text-center text-red=300">
+              <a href="/" class="md:block font-bold text-sm md:text-xl text-center text-red=300">
                 <svg class="w-46 h-46 fill-current" fill="currentColor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" version="1.1"    viewBox="0 0 2000 1500">
                   <rect fill="#ffffff"/>
                   <g transform="matrix(0.75,0,0,0.75,249.090909090909,511.33555343023886)">
@@ -220,8 +220,7 @@
                   </g>
                 </svg>
               </g>
-              </svg>
-            </div>
+              </a>
               <!-- Profile  -->
               {% if not request.user.is_anonymous %}
                 <a id="profile" class="space-y-3 block " href="{% url 'profiles:detail' request.user.username %}">

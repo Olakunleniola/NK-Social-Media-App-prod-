@@ -82,12 +82,14 @@ $(document).on("click", ".js-toggle-modal", function(e) {
             $btn.prop("disabled", false).html(buttonInnerHtml)
             $(".js-modal").addClass("hidden z-50");
             $textarea.val("");
+            $('#upload').val("");
+            $("#imagePreview").css("display", "none");
         },
 
         error: (error) => {
             console.warn(error);
             $btn.addClass("bg-red-500 text-white");
-            $btn.prop("diabled", false).text("Error");
+            $btn.prop("diabled", false).text("Error").css("background-color", "red");
         }
     })
 })
@@ -138,6 +140,7 @@ $(document).on("click", ".js-toggle-modal", function(e) {
     if ($first_name.val()){formData.append("first_name", $first_name.val().trim())}
     if ($last_name.val()){formData.append("last_name", $last_name.val().trim())}
     if ($email.val()){formData.append("email", $email.val().trim())}
+    $(this).val("Saving....");
     
     $.ajax({
         type: "POST",
@@ -152,18 +155,24 @@ $(document).on("click", ".js-toggle-modal", function(e) {
                 // Perform the redirect
                 window.location.href = data.redirect;
             } else {
-                // Handle other success scenarios or update UI
-                $username.val("");
                 $last_name.val("");
                 $first_name.val("");
-                $email.val("");
-                console.log(data);
+                $("#error-text").text("Success!! click on profile link to see changes")        
             }
         },
 
         error: (error) => {
             console.warn(error.responseText)
-        }
+            if (error.responseJSON){
+                $("#error-text").text(error.responseJSON.error)
+                $(this).val("Save");
+
+            }else {
+                $("#error-text").text(error.statusText)  
+                $(this).prop("disabled", true)
+                $(this).css("background-color", "red")
+            }
+        }   
     })
 
 })

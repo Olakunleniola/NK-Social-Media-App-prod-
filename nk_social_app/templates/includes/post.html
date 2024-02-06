@@ -1,13 +1,11 @@
-{% load thumbnail %}
+
 
 <!-- component -->
 <!-- class="flex items-center xs:w-[85%] shadow-xl w-full sm:w-[60%] mx-auto bg-white my-20 md:my-0 dark:bg-gray-900 rounded-3xl" -->
 <div class="post-detail w-[90%] bg-white shadow-lg dark:bg-gray-800 dark:border-gray-800 p-4 py-5 px-5 my-10 rounded-xl border mx-auto overflow-hidden" data-url="{% url 'post:detail' post.id %}" data-show="{{show_link}}">
     <div class="flex justify-between">
         <a class="flex items-center" href="{% url 'profiles:detail' post.author.username %}">
-            {% thumbnail post.author.profile.image "373x373" crop="center" as im %}
-                <img class="h-11 w-11 rounded-full" src="{{im.url}}"/>
-            {% endthumbnail %}
+            <img class="h-11 w-11 rounded-full object-cover" src="{{post.author.profile.image.url}}"/>
             <div class="ml-1.5 text-sm leading-tight">
                 <span class="text-black dark:text-white font-bold block ">{{post.author.username}}</span>
                 <span class="text-gray-500 dark:text-gray-400 font-normal block">@{{post.author.username}}</span>
@@ -24,9 +22,7 @@
     <p class="text-black dark:text-white block text-xl leading-snug my-6 break-words">{{post.text}}</p>
     <div>
         {% if post.image %}
-            {% thumbnail post.image "200x200" crop="center" as im %}
-                <img class="my-4 rounded-2xl border w-full h-auto border-gray-100 shadow-md dark:border-gray-700 object-cover" src="{{im.url}}"/>
-            {% endthumbnail %}
+                <img class="my-4 rounded-2xl border w-full h-auto border-gray-100 shadow-md dark:border-gray-700 object-cover" src="{{post.image.url}}" alt="post-image">
         {% endif %}
     </div>
     <div class="border-gray-200 dark:border-gray-600 border border-b-0 my-1"></div>
