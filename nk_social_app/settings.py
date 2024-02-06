@@ -28,8 +28,8 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 cloudinary.config( 
   cloud_name = "dhlmazrcf", 
-  api_key =  os.environ.get("CLD_KEY", "815727515698713"), 
-  api_secret = os.environ.get("CLD_SECRET", "ojFQNxqfN0K_RxQluD58ml0jMM0") 
+  api_key =  os.environ.get("CLD_KEY", ""), 
+  api_secret = os.environ.get("CLD_SECRET", "") 
 )
 
 
@@ -38,7 +38,7 @@ cloudinary.config(
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-9t3ir)iwm%oq4u3y!2dnoi8c&1efrhzc7l$04c2qo#b14)3+i)'
-SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-(3o6_%urxo74ol!t$h*3w#-nsw7^k@28x8%afg1nyjl&e)arer")
+SECRET_KEY = os.environ.get("SECRET_KEY", "sdsfsefefsscsd")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =  bool(int(os.environ.get("DEBUG", 1)))
@@ -118,7 +118,7 @@ if DEBUG:
 
 else:
     DATABASES = {     
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL", "postgres://nk_social_db_ismv_user:W28GaEgsYP3Vk3IAUjuowLiiTeIcaAys@dpg-cn0l97f109ks73c8t4ng-a.oregon-postgres.render.com/nk_social_db_ismv")),              
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL", "" )),              
     }
 
 

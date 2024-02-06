@@ -14,7 +14,7 @@
     <main id="top" class="md:max-w-[1024px] xl:w-[70%] w-screen shadow-xl mx-auto flex md:flex-row flex-col justify-between dark:bg-black dark:md:divide-x dark:md:divide-teal-500">
        
       <!-- Top Navbar  -->
-        <div class="w-screen h-16 border-b-2 shadow-md  border-teal-500 bg-white dark:bg-black dark:border-b-2 dark:border-teal-200 fixed top-0 md:hidden flex px-5 items-center justify-between">
+        <div id="view2" class="w-screen h-16 border-b-2 shadow-md  border-teal-500 bg-white dark:bg-black dark:border-b-2 dark:border-teal-200 fixed top-0 md:hidden flex px-5 items-center justify-between z-100">
           {% if not request.user.is_anonymous %}
             <button class="block js-sidenav-toggle">
               <img src="{% if request.user.profile.image %} {{request.user.profile.image.url}} {% else %} https://i.pinimg.com/1200x/da/d0/31/dad0312b7d04cc741c5fadd2eac3e0a6.jpg {% endif %}" alt="{% if not request.user.profile.image %}upload a pics {% else %}Avatar user {% endif %}"class="w-10 h-10 md:w-36 md:h-36 rounded-full mx-auto border-solid border-2 border-teal-300 object-cover"/>
