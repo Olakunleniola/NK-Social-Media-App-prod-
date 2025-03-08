@@ -14,8 +14,18 @@ import dj_database_url
 from pathlib import Path
 import cloudinary
 import cloudinary.uploader
-import cloudinary.api	
+import cloudinary.api
+import logging
 
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,  # Set the minimum log level to INFO
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",  # Log message format
+)
+
+logger = logging.getLogger("nk_social")
+
+logger.info("Welcome to nk social app")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

@@ -8,6 +8,7 @@ from posts.models import Post
 from django.shortcuts import render
 from followers.models import Followers
 from .models import Profile
+from nk_social_app.settings import logger
 
 class ProfileDetailView( DetailView ):
     http_method_names = ["get"]
@@ -126,11 +127,15 @@ class EditProfile(LoginRequiredMixin, TemplateView):
                 return JsonResponse({
                     'error': "email already exist. Try Again"
                 }, status=400)
-    
+        
+        logger.info("saving user profile.........")
         # Save the changes to the user
-        request.user.save()
+        try:
+            request.user.save()
         # Update or set profile images
-        request.user.profile.save()
+            request.user.profile.save()
+        except Exception as e:
+            logger.error("Error saving user profile ", str(e))
         # Redirect to the user's profile page
         redirect_url = reverse('profiles:detail', kwargs={'username': request.user.username})
         response_data = {'redirect': redirect_url}
