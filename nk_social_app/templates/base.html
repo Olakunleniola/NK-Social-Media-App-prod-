@@ -10,9 +10,10 @@
 
 </head>
 <!-- tailwind component navbar component from https://tailwindcomponents.com/component/dashboard-sidebar-navigation -->
-<body class="font-poppins antialiased ">
-    <main id="top" class="md:max-w-[1024px] xl:w-[70%] w-screen shadow-xl mx-auto flex md:flex-row flex-col justify-between dark:bg-black dark:md:divide-x dark:md:divide-teal-500">
-       
+<body class="font-poppins antialiased">
+  
+  <main id="top" class=" dark:bg-black">
+    <div class="md:max-w-[1024px] xl:w-[70%] w-screen shadow-xl mx-auto flex md:flex-row flex-col justify-between dark: dark:bg-black dark:md:divide-x dark:md:divide-teal-500 dark:border-r-4 dark:border-teal-500">
       <!-- Top Navbar  -->
         <div id="view2" class="w-screen h-16 border-b-2 shadow-md  border-teal-500 bg-white dark:bg-black dark:border-b-2 dark:border-teal-200 fixed top-0 md:hidden flex px-5 items-center justify-between z-100">
           {% if not request.user.is_anonymous %}
@@ -158,7 +159,10 @@
             {% endblock%}
         </div>
 
-    </main>
+    </div>    
+       
+
+  </main>
     
     <!-- Go top  Modal Arrow -->
     <a href="#top" id="navigate-top" class="fixed bottom-4 right-10 md:right-20 xl:right-[310px] hidden border-l-0">
